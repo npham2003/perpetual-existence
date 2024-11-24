@@ -4,5 +4,6 @@
 // Inherit the parent event
 event_inherited();
 
+
 x_draw=lerp(x_draw,obj_grid_manager.grid_start[0]+obj_grid_manager.tile_size*position[0],0.2)
 y_draw=lerp(y_draw,obj_grid_manager.grid_start[1]+obj_grid_manager.tile_size*position[1],0.2)

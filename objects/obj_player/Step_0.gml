@@ -5,7 +5,16 @@ hmove=input_check_pressed("right")-input_check_pressed("left")
 vmove=input_check_pressed("down")-input_check_pressed("up")
 
 
-move()
+
+if(actionable){
+	if(hmove!=0 || vmove!=0){
+		warped=false;	
+	}
+	move()
+	
+}
+
+show_debug_message(warped)
 
 //if(position[0]+hmove>=0&&position[0]+hmove<obj_grid_manager.grid_size[0] && position[1]+vmove>=0&&position[1]+vmove<obj_grid_manager.grid_size[1]){
 //	show_debug_message(position[0]+hmove<obj_grid_manager.grid_size[0])

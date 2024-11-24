@@ -15,8 +15,13 @@ push = function(_hmove, _vmove){
 			obj_grid_manager.grid[position[0]][position[1]].box_obj=pointer_null;
 			position[0]+=_hmove;
 			position[1]+=_vmove;
-			obj_grid_manager.grid[position[0]][position[1]].box=true;
-			obj_grid_manager.grid[position[0]][position[1]].box_obj=self;
+			if(obj_grid_manager.grid[position[0]][position[1]].hole){
+				obj_grid_manager.grid[position[0]][position[1]].hole=false;
+				draw_color=c_gray;
+			}else{
+				obj_grid_manager.grid[position[0]][position[1]].box=true;
+				obj_grid_manager.grid[position[0]][position[1]].box_obj=self;
+			}
 			return true;
 		}else{
 			return false;	

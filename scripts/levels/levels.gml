@@ -6,9 +6,13 @@ global.levels = {
 	test: {
 		player: [0,0],
 		wall: [[3,3], [2,2], [2,3]],
-		
-		box: [[1,1]]
+		warp: [[[4,5],[3,0]]],
+		box: [[1,1]],
+		hole:[[5,5]]
 	}
 	
 	
 }
+
+
+global.warp_colors = [c_fuchsia]

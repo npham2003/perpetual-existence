@@ -7,7 +7,8 @@ event_inherited();
 hmove=0;
 vmove=0;
 
-
+actionable=true;
+warped=false;
 
 /*
 0 - up
@@ -24,9 +25,20 @@ move = function(){
 			position[1]+=vmove;	
 			}
 		
+		}else if(obj_grid_manager.grid[position[0]+hmove][position[1]+vmove].warp!=pointer_invalid && !warped){
+			
+			position[0]+=hmove;
+			position[1]+=vmove;
+			if(!obj_grid_manager.grid[obj_grid_manager.grid[position[0]][position[1]].warp[0]][obj_grid_manager.grid[position[0]][position[1]].warp[1]].box){
+				actionable=false;
+				warped=true;
+				alarm[0]=60;
+			}
+			
 		}else if(!obj_grid_manager.grid[position[0]+hmove][position[1]+vmove].wall && !obj_grid_manager.grid[position[0]+hmove][position[1]+vmove].hole){
 			position[0]+=hmove;
 			position[1]+=vmove;
 		}
 	}
+	
 }

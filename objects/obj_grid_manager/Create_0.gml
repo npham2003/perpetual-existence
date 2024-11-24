@@ -28,7 +28,7 @@ for (i=0;i<grid_size[0];i++){
             wall: false,
 			box: false,
 			box_obj: pointer_null,
-			warp: -1,
+			warp: pointer_invalid,
 			hole: false,
 			stairs: false,
         }
@@ -52,8 +52,33 @@ for (i=0;i<array_length(global.levels[$level].wall);i++){
 for (i=0;i<array_length(global.levels[$level].box);i++){
 	grid[global.levels[$level].box[i][0]][global.levels[$level].box[i][1]].box=true;
 	var _box = instance_create_layer(grid_start[0]+tile_size*global.levels[$level].box[i][0],grid_start[1]+tile_size*global.levels[$level].box[i][1],"Instances",obj_box)
-	_box.position=global.levels[$level].box[i];
+	
+	array_copy(_box.position,0,global.levels[$level].box[i],0,2);
 	_box.x_draw=grid_start[0]+tile_size*_box.position[0];
 	_box.y_draw=grid_start[1]+tile_size*_box.position[1];
 	grid[global.levels[$level].box[i][0]][global.levels[$level].box[i][1]].box_obj = _box;
+}
+
+for (i=0;i<array_length(global.levels[$level].warp);i++){
+	grid[global.levels[$level].warp[i][0][0]][global.levels[$level].warp[i][0][1]].warp=global.levels[$level].warp[i][1];
+	grid[global.levels[$level].warp[i][1][0]][global.levels[$level].warp[i][1][1]].warp=global.levels[$level].warp[i][0];
+	var _warp = instance_create_layer(grid_start[0]+tile_size*global.levels[$level].warp[i][0][0],grid_start[1]+tile_size*global.levels[$level].warp[i][0][1],"Instances",obj_warp_tile);
+	_warp.position=global.levels[$level].warp[i][0];
+	_warp.x_draw=grid_start[0]+tile_size*_warp.position[0];
+	_warp.y_draw=grid_start[1]+tile_size*_warp.position[1];
+	_warp.draw_color=global.warp_colors[i];
+	_warp = instance_create_layer(grid_start[0]+tile_size*global.levels[$level].warp[i][1][0],grid_start[1]+tile_size*global.levels[$level].warp[i][1][1],"Instances",obj_warp_tile);
+	_warp.position=global.levels[$level].warp[i][1];
+	_warp.x_draw=grid_start[0]+tile_size*_warp.position[0];
+	_warp.y_draw=grid_start[1]+tile_size*_warp.position[1];
+	_warp.draw_color=global.warp_colors[i];
+	
+}
+
+for (i=0;i<array_length(global.levels[$level].hole);i++){
+	grid[global.levels[$level].hole[i][0]][global.levels[$level].hole[i][1]].hole=true;
+	var _hole = instance_create_layer(grid_start[0]+tile_size*global.levels[$level].hole[i][0],grid_start[1]+tile_size*global.levels[$level].hole[i][1],"Instances",obj_hole)
+	_hole.position=global.levels[$level].hole[i];
+	_hole.x_draw=grid_start[0]+tile_size*_hole.position[0];
+	_hole.y_draw=grid_start[1]+tile_size*_hole.position[1];
 }

@@ -4,15 +4,19 @@
 
 global.levels = {
 	test: {
+		size: [10, 10],
 		player: [0,0],
 		wall: [[3,3], [2,2], [2,3]],
-		warp: [[[4,5],[3,0]]],
-		box: [[1,1]],
-		hole:[[5,5]]
+		warp: [[[4,5], [3,0]]],
+		box: [[1,1], [6, 7]],
+		hole:[[5,5]],
+		switches: [[[6,6], [7,7]]]
 	}
 	
 	
 }
 
 
-global.warp_colors = [c_fuchsia]
+global.warp_colors = [c_fuchsia];
+
+global.switch_colors = [c_yellow];

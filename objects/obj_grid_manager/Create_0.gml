@@ -1,26 +1,17 @@
 /// @description Insert description here
 // You can write your code in this editor
 
-grid_size=[10,10]
+
 
 grid=[];
 
-level="test"
+level="test";
 
-grid_start=[50,50]
-tile_size=64
+grid_start=[50,50];
+tile_size=64;
+grid_size=[];
+array_copy(grid_size,0,global.levels[$level].size,0,2);
 
-
-function gridTile(_gridX, _gridY, _wall = false, _box = false, _warp = -1, _hole = false, _stairs = false) constructor{
-	gridX =_gridX;
-	gridY =_gridY;
-	wall =_wall;
-	box =_box;
-	warp = _warp;
-	hole = _hole;
-	stairs = _stairs;
-	
-}
 
 for (i=0;i<grid_size[0];i++){
 	for(j=0;j<grid_size[1];j++){
@@ -31,6 +22,9 @@ for (i=0;i<grid_size[0];i++){
 			warp: pointer_invalid,
 			hole: false,
 			stairs: false,
+			switch_tile: pointer_invalid,
+			door_open: true,
+			door_obj: pointer_null
         }
 		show_debug_message(grid[i][j])
 	}
@@ -81,4 +75,21 @@ for (i=0;i<array_length(global.levels[$level].hole);i++){
 	_hole.position=global.levels[$level].hole[i];
 	_hole.x_draw=grid_start[0]+tile_size*_hole.position[0];
 	_hole.y_draw=grid_start[1]+tile_size*_hole.position[1];
+}
+
+for (i=0;i<array_length(global.levels[$level].switches);i++){
+	grid[global.levels[$level].switches[i][0][0]][global.levels[$level].switches[i][0][1]].switch_tile=global.levels[$level].switches[i][1];
+	grid[global.levels[$level].switches[i][1][0]][global.levels[$level].switches[i][1][1]].door_open=false;
+	var _switch = instance_create_layer(grid_start[0]+tile_size*global.levels[$level].switches[i][0][0],grid_start[1]+tile_size*global.levels[$level].switches[i][0][1],"Instances",obj_switch);
+	_switch.position=global.levels[$level].switches[i][0];
+	_switch.x_draw=grid_start[0]+tile_size*_switch.position[0];
+	_switch.y_draw=grid_start[1]+tile_size*_switch.position[1];
+	_switch.draw_color=global.switch_colors[i];
+	var _door = instance_create_layer(grid_start[0]+tile_size*global.levels[$level].switches[i][1][0],grid_start[1]+tile_size*global.levels[$level].switches[i][1][1],"Instances",obj_door);
+	_door.position=global.levels[$level].switches[i][1];
+	_door.x_draw=grid_start[0]+tile_size*_door.position[0];
+	_door.y_draw=grid_start[1]+tile_size*_door.position[1];
+	_door.draw_color=global.switch_colors[i];
+	_door.draw_color_original=global.switch_colors[i];
+	grid[global.levels[$level].switches[i][1][0]][global.levels[$level].switches[i][1][1]].door_obj=_door;
 }

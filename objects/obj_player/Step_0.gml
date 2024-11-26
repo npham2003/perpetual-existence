@@ -14,7 +14,7 @@ if(actionable){
 	
 }
 
-show_debug_message(warped)
+
 
 //if(position[0]+hmove>=0&&position[0]+hmove<obj_grid_manager.grid_size[0] && position[1]+vmove>=0&&position[1]+vmove<obj_grid_manager.grid_size[1]){
 //	show_debug_message(position[0]+hmove<obj_grid_manager.grid_size[0])

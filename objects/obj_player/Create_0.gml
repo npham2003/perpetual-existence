@@ -77,6 +77,9 @@ move = function(){
 		
 		obj_grid_manager.force_update_switches()
 	}
+	if(moved&& obj_game_manager.time_stop){
+		obj_game_manager.time_turns_left-=1;	
+	}
 	
 }
 

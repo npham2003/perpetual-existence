@@ -11,6 +11,8 @@ actionable=true;
 warped=false;
 moved=false;
 
+stored_pushes=[];
+
 /*
 0 - up
 1 - left
@@ -23,11 +25,16 @@ move = function(){
 	
 	if(position[0]+hmove>=0&&position[0]+hmove<obj_grid_manager.grid_size[0] && position[1]+vmove>=0&&position[1]+vmove<obj_grid_manager.grid_size[1]){
 		if(obj_grid_manager.grid[position[0]+hmove][position[1]+vmove].box){
-			if(obj_grid_manager.grid[position[0]+hmove][position[1]+vmove].box_obj.push(hmove, vmove)){
-				position[0]+=hmove;
-				position[1]+=vmove;	
-				moved=true;
-				obj_grid_manager.grid[position[0]+hmove][position[1]+vmove].box_obj.switch_control(hmove, vmove);
+			show_debug_message(obj_grid_manager.grid[position[0]+hmove][position[1]+vmove].box_obj.object_index==obj_box_normal)
+			if(!obj_game_manager.time_stop || obj_grid_manager.grid[position[0]+hmove][position[1]+vmove].box_obj.object_index==obj_box_normal){
+				if(obj_grid_manager.grid[position[0]+hmove][position[1]+vmove].box_obj.push(hmove, vmove)){
+					position[0]+=hmove;
+					position[1]+=vmove;	
+					moved=true;
+				
+				}
+			}else{
+				array_push(stored_pushes,[obj_grid_manager.grid[position[0]+hmove][position[1]+vmove].box_obj, variable_clone(hmove), variable_clone(vmove)])
 			}
 		
 		}else if(obj_grid_manager.grid[position[0]+hmove][position[1]+vmove].warp!=pointer_invalid && !warped){
@@ -50,21 +57,32 @@ move = function(){
 	if(hmove==0 && vmove==0){
 		moved=false;	
 	}
-	if(obj_grid_manager.grid[position[0]-hmove][position[1]-vmove].switch_tile!=pointer_invalid && moved){
+	if(!obj_game_manager.time_stop){
+		//if(obj_grid_manager.grid[position[0]-hmove][position[1]-vmove].switch_tile!=pointer_invalid && moved){
 		
-		obj_grid_manager.grid[obj_grid_manager.grid[position[0]-hmove][position[1]-vmove].switch_tile[0]][obj_grid_manager.grid[position[0]-hmove][position[1]-vmove].switch_tile[1]].door_open=false;
-		//show_debug_message(obj_grid_manager.grid[obj_grid_manager.grid[position[0]-hmove][position[1]-vmove].switch_tile[0]][obj_grid_manager.grid[position[0]-hmove][position[1]-vmove].switch_tile[1]])
-		obj_grid_manager.grid[obj_grid_manager.grid[position[0]-hmove][position[1]-vmove].switch_tile[0]][obj_grid_manager.grid[position[0]-hmove][position[1]-vmove].switch_tile[1]].door_obj.draw_color=obj_grid_manager.grid[obj_grid_manager.grid[position[0]-hmove][position[1]-vmove].switch_tile[0]][obj_grid_manager.grid[position[0]-hmove][position[1]-vmove].switch_tile[1]].door_obj.draw_color_original;
-		if(obj_grid_manager.grid[obj_grid_manager.grid[position[0]-hmove][position[1]-vmove].switch_tile[0]][obj_grid_manager.grid[position[0]-hmove][position[1]-vmove].switch_tile[1]].box){
+		//	obj_grid_manager.grid[obj_grid_manager.grid[position[0]-hmove][position[1]-vmove].switch_tile[0]][obj_grid_manager.grid[position[0]-hmove][position[1]-vmove].switch_tile[1]].door_open=false;
+		//	//show_debug_message(obj_grid_manager.grid[obj_grid_manager.grid[position[0]-hmove][position[1]-vmove].switch_tile[0]][obj_grid_manager.grid[position[0]-hmove][position[1]-vmove].switch_tile[1]])
+		//	obj_grid_manager.grid[obj_grid_manager.grid[position[0]-hmove][position[1]-vmove].switch_tile[0]][obj_grid_manager.grid[position[0]-hmove][position[1]-vmove].switch_tile[1]].door_obj.draw_color=obj_grid_manager.grid[obj_grid_manager.grid[position[0]-hmove][position[1]-vmove].switch_tile[0]][obj_grid_manager.grid[position[0]-hmove][position[1]-vmove].switch_tile[1]].door_obj.draw_color_original;
+		//	if(obj_grid_manager.grid[obj_grid_manager.grid[position[0]-hmove][position[1]-vmove].switch_tile[0]][obj_grid_manager.grid[position[0]-hmove][position[1]-vmove].switch_tile[1]].box){
 			
-				obj_grid_manager.grid[obj_grid_manager.grid[position[0]-hmove][position[1]-vmove].switch_tile[0]][obj_grid_manager.grid[position[0]-hmove][position[1]-vmove].switch_tile[1]].box=false;
-				instance_destroy(obj_grid_manager.grid[obj_grid_manager.grid[position[0]-hmove][position[1]-vmove].switch_tile[0]][obj_grid_manager.grid[position[0]-hmove][position[1]-vmove].switch_tile[1]].box_obj)
-				obj_grid_manager.grid[obj_grid_manager.grid[position[0]-hmove][position[1]-vmove].switch_tile[0]][obj_grid_manager.grid[position[0]-hmove][position[1]-vmove].switch_tile[1]].box_obj=pointer_null
-		}
-	}
-	if(obj_grid_manager.grid[position[0]][position[1]].switch_tile!=pointer_invalid){
-		obj_grid_manager.grid[obj_grid_manager.grid[position[0]][position[1]].switch_tile[0]][obj_grid_manager.grid[position[0]][position[1]].switch_tile[1]].door_open=true;
-		obj_grid_manager.grid[obj_grid_manager.grid[position[0]][position[1]].switch_tile[0]][obj_grid_manager.grid[position[0]][position[1]].switch_tile[1]].door_obj.draw_color=merge_color(obj_grid_manager.grid[obj_grid_manager.grid[position[0]][position[1]].switch_tile[0]][obj_grid_manager.grid[position[0]][position[1]].switch_tile[1]].door_obj.draw_color_original,c_black,0.5);
+		//			obj_grid_manager.grid[obj_grid_manager.grid[position[0]-hmove][position[1]-vmove].switch_tile[0]][obj_grid_manager.grid[position[0]-hmove][position[1]-vmove].switch_tile[1]].box=false;
+		//			instance_destroy(obj_grid_manager.grid[obj_grid_manager.grid[position[0]-hmove][position[1]-vmove].switch_tile[0]][obj_grid_manager.grid[position[0]-hmove][position[1]-vmove].switch_tile[1]].box_obj)
+		//			obj_grid_manager.grid[obj_grid_manager.grid[position[0]-hmove][position[1]-vmove].switch_tile[0]][obj_grid_manager.grid[position[0]-hmove][position[1]-vmove].switch_tile[1]].box_obj=pointer_null
+		//	}
+		//}
+		//if(obj_grid_manager.grid[position[0]][position[1]].switch_tile!=pointer_invalid){
+		//	obj_grid_manager.grid[obj_grid_manager.grid[position[0]][position[1]].switch_tile[0]][obj_grid_manager.grid[position[0]][position[1]].switch_tile[1]].door_open=true;
+		//	obj_grid_manager.grid[obj_grid_manager.grid[position[0]][position[1]].switch_tile[0]][obj_grid_manager.grid[position[0]][position[1]].switch_tile[1]].door_obj.draw_color=merge_color(obj_grid_manager.grid[obj_grid_manager.grid[position[0]][position[1]].switch_tile[0]][obj_grid_manager.grid[position[0]][position[1]].switch_tile[1]].door_obj.draw_color_original,c_black,0.5);
+		//}
+		
+		obj_grid_manager.force_update_switches()
 	}
 	
+}
+
+release_boxes = function(){
+	for(var i=0;i<array_length(stored_pushes);i++){
+		stored_pushes[i][0].resume_time(stored_pushes[i][1],stored_pushes[i][2]);
+	}
+	stored_pushes=[];
 }

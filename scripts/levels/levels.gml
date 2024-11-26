@@ -8,7 +8,8 @@ global.levels = {
 		player: [0,0],
 		wall: [[3,3], [2,2], [2,3]],
 		warp: [[[4,5], [3,0]]],
-		box: [[1,1], [6, 7]],
+		box_stasis: [[1,1], [6, 7]],
+		box_normal: [[5,6]],
 		hole:[[5,5]],
 		switches: [[[6,6], [7,7]]]
 	}

@@ -1,12 +1,12 @@
 {
   "$GMObject":"",
-  "%Name":"obj_box",
+  "%Name":"obj_box_stasis",
   "eventList":[
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":8,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
   ],
   "managed":true,
-  "name":"obj_box",
+  "name":"obj_box_stasis",
   "overriddenProperties":[],
   "parent":{
     "name":"Objects",
@@ -34,8 +34,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"spr_test_box",
-    "path":"sprites/spr_test_box/spr_test_box.yy",
+    "name":"spr_test_box_stasis",
+    "path":"sprites/spr_test_box_stasis/spr_test_box_stasis.yy",
   },
   "spriteMaskId":null,
   "visible":true,

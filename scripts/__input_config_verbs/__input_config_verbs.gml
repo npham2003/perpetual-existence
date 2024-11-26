@@ -20,7 +20,7 @@ function __input_config_verbs()
             left:  [input_binding_key(vk_left),  input_binding_key("A")],
             right: [input_binding_key(vk_right), input_binding_key("D")],
             
-            accept:  input_binding_key(vk_space),
+            time:  input_binding_key(vk_space),
             cancel:  input_binding_key(vk_backspace),
             action:  input_binding_key(vk_enter),
             special: input_binding_key(vk_shift),
@@ -28,7 +28,7 @@ function __input_config_verbs()
             //No aiming verbs since we use the mouse for that (see below for aiming verb examples)
             shoot: input_binding_mouse_button(mb_left),
             
-            pause: input_binding_key(vk_escape),
+            reset: input_binding_key(vk_escape),
         },
         
         gamepad:

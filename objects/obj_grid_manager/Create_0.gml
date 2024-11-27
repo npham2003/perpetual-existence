@@ -5,9 +5,9 @@
 
 grid=[];
 
-level="test";
+level="mockup";
 
-grid_start=[50,50];
+grid_start=[100,100];
 tile_size=64;
 grid_size=[];
 array_copy(grid_size,0,global.levels[$level].size,0,2);
@@ -43,6 +43,39 @@ for (var i=0;i<array_length(global.levels[$level].wall);i++){
 	_wall.x_draw=grid_start[0]+tile_size*_wall.position[0];
 	_wall.y_draw=grid_start[1]+tile_size*_wall.position[1];
 }
+
+var stairs = instance_create_layer(grid_start[0]+tile_size*global.levels[$level].stairs[0],grid_start[1]+tile_size*global.levels[$level].stairs[1],"Instances",obj_stairs)
+array_copy(stairs.position,0,global.levels[$level].stairs,0,2);
+
+stairs.x_draw=grid_start[0]+tile_size*stairs.position[0];
+stairs.y_draw=grid_start[1]+tile_size*stairs.position[1];
+
+for (var i=-1;i<=grid_size[0];i++){
+	
+	var _wall = instance_create_layer(grid_start[0]+tile_size*i,grid_start[1]+tile_size*-1,"Instances",obj_wall)
+	_wall.x_draw=grid_start[0]+tile_size*i;
+	_wall.y_draw=grid_start[1]+tile_size*-1;
+}
+
+for (var i=0;i<grid_size[1];i++){
+	var _wall = instance_create_layer(grid_start[0]+tile_size*-1,grid_start[1]+tile_size*i,"Instances",obj_wall)
+	_wall.x_draw=grid_start[0]+tile_size*-1;
+	_wall.y_draw=grid_start[1]+tile_size*i;
+}
+
+for (var i=-1;i<=grid_size[0];i++){
+	var _wall = instance_create_layer(grid_start[0]+tile_size*i,grid_start[1]+tile_size*(grid_size[1]),"Instances",obj_wall)
+	_wall.x_draw=grid_start[0]+tile_size*i;
+	_wall.y_draw=grid_start[1]+tile_size*(grid_size[1]);
+}
+
+for (var i=0;i<grid_size[1];i++){
+	var _wall = instance_create_layer(grid_start[0]+tile_size*(grid_size[0]),grid_start[1]+tile_size*i,"Instances",obj_wall)
+	_wall.x_draw=grid_start[0]+tile_size*(grid_size[0]);
+	_wall.y_draw=grid_start[1]+tile_size*i;
+}
+
+
 
 for (var i=0;i<array_length(global.levels[$level].box_stasis);i++){
 	grid[global.levels[$level].box_stasis[i][0]][global.levels[$level].box_stasis[i][1]].box=true;
@@ -120,6 +153,10 @@ force_update_switches = function(){
 						grid[_tile.switch_tile[0]][_tile.switch_tile[1]].box=false;
 						instance_destroy(grid[_tile.switch_tile[0]][_tile.switch_tile[1]].box_obj);
 						grid[_tile.switch_tile[0]][_tile.switch_tile[1]].box_obj=pointer_null;
+					}
+					if(array_equals(obj_player.position,_tile.switch_tile)){
+						obj_player.actionable=false;
+						obj_player.alarm[1]=30;
 					}
 				}
 				

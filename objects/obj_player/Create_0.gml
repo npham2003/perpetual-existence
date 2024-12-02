@@ -13,6 +13,9 @@ moved=false;
 
 stored_pushes=[];
 
+sprite = spr_walk_down;
+image_speed = 0;
+
 /*
 0 - up
 1 - left
@@ -64,6 +67,7 @@ move = function(){
 		moved=false;	
 	}
 	if(!obj_game_manager.time_stop){
+	
 		//if(obj_grid_manager.grid[position[0]-hmove][position[1]-vmove].switch_tile!=pointer_invalid && moved){
 		
 		//	obj_grid_manager.grid[obj_grid_manager.grid[position[0]-hmove][position[1]-vmove].switch_tile[0]][obj_grid_manager.grid[position[0]-hmove][position[1]-vmove].switch_tile[1]].door_open=false;
@@ -86,6 +90,11 @@ move = function(){
 	if(moved&& obj_game_manager.time_stop){
 		// reduce time stop turns left if moved
 		obj_game_manager.time_turns_left-=1;	
+	}
+	
+	if(obj_grid_manager.grid[position[0]][position[1]].stairs){
+		actionable=false;	
+		alarm[2]=60;
 	}
 	
 }

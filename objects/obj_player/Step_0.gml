@@ -14,6 +14,33 @@ if(actionable){
 	
 }
 
+if (hmove == 1){
+	sprite = spr_walk_right;
+	image_speed = 1;
+	if (input_check_released("right")){
+		image_speed = 0;
+	}
+}else if (hmove = -1){
+	sprite = spr_walk_left;
+	image_speed = 1;
+	if (input_check_released("left")){
+		image_speed = 0;
+	}
+}
+
+if (vmove = 1){
+	sprite = spr_walk_down;
+	image_speed = 1;
+	if (input_check_released("down")){
+		image_speed = 0;
+	}
+}else if (vmove = -1){
+	sprite = spr_walk_up;
+	image_speed = 1;
+	if (input_check_released("right")){
+		image_speed = 0;
+	}
+}
 
 
 //if(position[0]+hmove>=0&&position[0]+hmove<obj_grid_manager.grid_size[0] && position[1]+vmove>=0&&position[1]+vmove<obj_grid_manager.grid_size[1]){

@@ -33,8 +33,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"spr_test_stairs",
-    "path":"sprites/spr_test_stairs/spr_test_stairs.yy",
+    "name":"spr_stairs",
+    "path":"sprites/spr_stairs/spr_stairs.yy",
   },
   "spriteMaskId":null,
   "visible":true,

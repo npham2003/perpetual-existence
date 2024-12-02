@@ -62,8 +62,9 @@ final_resume = function(){
 		obj_grid_manager.grid[position[0]][position[1]].box=false;
 		obj_grid_manager.grid[position[0]][position[1]].box_obj=pointer_null;
 		obj_grid_manager.grid[position[0]][position[1]].hole=false;
+		
 		draw_color=c_gray;
-	}else{
+	}else if(draw_color!=c_gray){
 		obj_grid_manager.grid[position[0]][position[1]].box=true;
 		obj_grid_manager.grid[position[0]][position[1]].box_obj=self;
 	}

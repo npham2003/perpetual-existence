@@ -5,7 +5,7 @@
 
 grid=[];
 
-level="mockup";
+level="warp_snake";
 
 grid_start=[100,100];
 tile_size=64;
@@ -26,7 +26,7 @@ for (var i=0;i<grid_size[0];i++){
 			door_open: true,
 			door_obj: pointer_null
         }
-		show_debug_message(grid[i][j])
+		
 	}
 }
 
@@ -46,7 +46,7 @@ for (var i=0;i<array_length(global.levels[$level].wall);i++){
 
 var stairs = instance_create_layer(grid_start[0]+tile_size*global.levels[$level].stairs[0],grid_start[1]+tile_size*global.levels[$level].stairs[1],"Instances",obj_stairs)
 array_copy(stairs.position,0,global.levels[$level].stairs,0,2);
-
+grid[stairs.position[0]][stairs.position[1]].stairs=true;
 stairs.x_draw=grid_start[0]+tile_size*stairs.position[0];
 stairs.y_draw=grid_start[1]+tile_size*stairs.position[1];
 
@@ -61,18 +61,25 @@ for (var i=0;i<grid_size[1];i++){
 	var _wall = instance_create_layer(grid_start[0]+tile_size*-1,grid_start[1]+tile_size*i,"Instances",obj_wall)
 	_wall.x_draw=grid_start[0]+tile_size*-1;
 	_wall.y_draw=grid_start[1]+tile_size*i;
+	_wall.position[1]=-1;
 }
 
 for (var i=-1;i<=grid_size[0];i++){
 	var _wall = instance_create_layer(grid_start[0]+tile_size*i,grid_start[1]+tile_size*(grid_size[1]),"Instances",obj_wall)
 	_wall.x_draw=grid_start[0]+tile_size*i;
 	_wall.y_draw=grid_start[1]+tile_size*(grid_size[1]);
+	_wall.position[1]=grid_size[1];
+	if(i==-1 || i==grid_size[0]){
+		_wall.position[1]=-1;
+	}
 }
 
 for (var i=0;i<grid_size[1];i++){
 	var _wall = instance_create_layer(grid_start[0]+tile_size*(grid_size[0]),grid_start[1]+tile_size*i,"Instances",obj_wall)
 	_wall.x_draw=grid_start[0]+tile_size*(grid_size[0]);
 	_wall.y_draw=grid_start[1]+tile_size*i;
+	_wall.position[1]=-1;
+
 }
 
 

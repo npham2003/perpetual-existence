@@ -33,8 +33,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"spr_test_hole",
-    "path":"sprites/spr_test_hole/spr_test_hole.yy",
+    "name":"spr_hole",
+    "path":"sprites/spr_hole/spr_hole.yy",
   },
   "spriteMaskId":null,
   "visible":true,

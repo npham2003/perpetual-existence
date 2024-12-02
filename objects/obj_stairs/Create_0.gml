@@ -4,4 +4,4 @@
 // Inherit the parent event
 event_inherited();
 
-sprite=spr_test_stairs
+sprite=spr_stairs

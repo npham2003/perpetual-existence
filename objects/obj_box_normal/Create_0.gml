@@ -4,8 +4,12 @@
 // Inherit the parent event
 event_inherited();
 
-sprite=spr_test_box_normal;
+sprite=spr_box_normal;
 moved=false;
+
+
+hole_fill_animation = false;
+image_index = 0;
 
 stored_movement=[];
 
@@ -22,7 +26,8 @@ push = function(_hmove, _vmove){
 			}
 			if(obj_grid_manager.grid[position[0]][position[1]].hole){
 				obj_grid_manager.grid[position[0]][position[1]].hole=false;
-				draw_color=c_gray;
+				//draw_color=c_gray;
+				hole_fill_animation = true;
 			}else{
 				obj_grid_manager.grid[position[0]][position[1]].box=true;
 				obj_grid_manager.grid[position[0]][position[1]].box_obj=self;

@@ -4,4 +4,5 @@
 // Inherit the parent event
 event_inherited();
 
-sprite=spr_test_wall
+sprite=spr_wall;
+checked=false;

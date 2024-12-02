@@ -24,6 +24,7 @@ if(time_turns_left==0){
 	with (obj_box_stasis){
 			final_resume();
 	}
+	time_turns_left-=1;
 }
 
 if(input_check_pressed("reset")){

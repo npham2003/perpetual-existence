@@ -11,7 +11,8 @@ global.levels = {
 		box_stasis: [[1,1], [6, 7]],
 		box_normal: [[5,6]],
 		hole:[[5,5]],
-		switches: [[[6,6], [7,7]]]
+		switches: [[[6,6], [7,7]]],
+		stairs: [9,9]
 	},
 	
 	mockup: {
@@ -73,6 +74,18 @@ global.levels = {
 		box_normal: [],
 		hole:[[3,4]],
 		switches: [],
+		stairs: [6,0]
+	},
+	
+	hole_tutorial: {
+		size: [7,5],
+		player: [0,0],
+		wall: [[0,1], [1,1], [2,1], [4,1], [5,1], [6,1]],
+		warp: [],
+		box_stasis: [[3,2]],
+		box_normal: [],
+		hole:[[3,3]],
+		switches: [[[3,4],[5,0]]],
 		stairs: [6,0]
 	},
 	

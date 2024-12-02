@@ -81,6 +81,7 @@
   "name":"Perpetual Existence",
   "resources":[
     {"id":{"name":"input_controller_object","path":"objects/input_controller_object/input_controller_object.yy",},},
+    {"id":{"name":"obj_arrow","path":"objects/obj_arrow/obj_arrow.yy",},},
     {"id":{"name":"obj_box_normal","path":"objects/obj_box_normal/obj_box_normal.yy",},},
     {"id":{"name":"obj_box_stasis","path":"objects/obj_box_stasis/obj_box_stasis.yy",},},
     {"id":{"name":"obj_door","path":"objects/obj_door/obj_door.yy",},},
@@ -95,6 +96,7 @@
     {"id":{"name":"obj_wall","path":"objects/obj_wall/obj_wall.yy",},},
     {"id":{"name":"obj_warp_tile","path":"objects/obj_warp_tile/obj_warp_tile.yy",},},
     {"id":{"name":"Room2","path":"rooms/Room2/Room2.yy",},},
+    {"id":{"name":"test_1","path":"rooms/test_1/test_1.yy",},},
     {"id":{"name":"test","path":"rooms/test/test.yy",},},
     {"id":{"name":"__input_axis_is_directional","path":"scripts/__input_axis_is_directional/__input_axis_is_directional.yy",},},
     {"id":{"name":"__input_binding_get_label","path":"scripts/__input_binding_get_label/__input_binding_get_label.yy",},},
@@ -435,6 +437,7 @@
     {"id":{"name":"spr_hole","path":"sprites/spr_hole/spr_hole.yy",},},
     {"id":{"name":"spr_player","path":"sprites/spr_player/spr_player.yy",},},
     {"id":{"name":"spr_stairs","path":"sprites/spr_stairs/spr_stairs.yy",},},
+    {"id":{"name":"spr_test_arrow","path":"sprites/spr_test_arrow/spr_test_arrow.yy",},},
     {"id":{"name":"spr_test_box_stasis","path":"sprites/spr_test_box_stasis/spr_test_box_stasis.yy",},},
     {"id":{"name":"spr_test_door","path":"sprites/spr_test_door/spr_test_door.yy",},},
     {"id":{"name":"spr_test_hole","path":"sprites/spr_test_hole/spr_test_hole.yy",},},
@@ -460,6 +463,7 @@
   "RoomOrderNodes":[
     {"roomId":{"name":"test","path":"rooms/test/test.yy",},},
     {"roomId":{"name":"Room2","path":"rooms/Room2/Room2.yy",},},
+    {"roomId":{"name":"test_1","path":"rooms/test_1/test_1.yy",},},
   ],
   "templateType":"game",
   "TextureGroups":[

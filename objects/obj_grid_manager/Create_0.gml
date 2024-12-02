@@ -5,7 +5,7 @@
 
 grid=[];
 
-level="warp_snake";
+level="test";
 
 grid_start=[100,100];
 tile_size=64;

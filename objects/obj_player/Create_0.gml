@@ -13,6 +13,8 @@ moved=false;
 
 stored_pushes=[];
 
+move_prev=[0,0];
+
 sprite = spr_walk_down;
 image_speed = 0;
 
@@ -25,41 +27,48 @@ image_speed = 0;
 
 move = function(){
 	moved=false;
+	
 	// check if target is in the grid
 	if(position[0]+hmove>=0&&position[0]+hmove<obj_grid_manager.grid_size[0] && position[1]+vmove>=0&&position[1]+vmove<obj_grid_manager.grid_size[1]){
-		// is a box on the target space
-		if(obj_grid_manager.grid[position[0]+hmove][position[1]+vmove].box){
-			
-			
-			if(!obj_game_manager.time_stop || obj_grid_manager.grid[position[0]+hmove][position[1]+vmove].box_obj.object_index==obj_box_normal){
-				if(obj_grid_manager.grid[position[0]+hmove][position[1]+vmove].box_obj.push(hmove, vmove)){
-					position[0]+=hmove;
-					position[1]+=vmove;	
-					moved=true;
-				
-				}
-			}else{
-				array_push(stored_pushes,[obj_grid_manager.grid[position[0]+hmove][position[1]+vmove].box_obj, variable_clone(hmove), variable_clone(vmove)])
-			}
 		
-		}else if(obj_grid_manager.grid[position[0]+hmove][position[1]+vmove].warp!=pointer_invalid && !warped){
-			// is target a warp tile
-			position[0]+=hmove;
-			position[1]+=vmove;
-			moved=true;
+		if(hmove!=0 || vmove!=0){
+			// is a box on the target space
+		
+			if(obj_grid_manager.grid[position[0]+hmove][position[1]+vmove].box){
 			
-			// warp only if other warp spot doesnt have a box on it
-			if(!obj_grid_manager.grid[obj_grid_manager.grid[position[0]][position[1]].warp[0]][obj_grid_manager.grid[position[0]][position[1]].warp[1]].box){
-				actionable=false;
-				warped=true;
-				alarm[0]=60;
+			
+				if(!obj_game_manager.time_stop || obj_grid_manager.grid[position[0]+hmove][position[1]+vmove].box_obj.object_index==obj_box_normal){
+					if(obj_grid_manager.grid[position[0]+hmove][position[1]+vmove].box_obj.push(hmove, vmove)){
+						position[0]+=hmove;
+						position[1]+=vmove;	
+						moved=true;
+				
+					}
+				}else{
+					array_push(stored_pushes,[obj_grid_manager.grid[position[0]+hmove][position[1]+vmove].box_obj, variable_clone(hmove), variable_clone(vmove)])
+					obj_grid_manager.grid[position[0]+hmove][position[1]+vmove].box_obj.create_arrow(hmove,vmove)
+				}
+		
+			}else if(obj_grid_manager.grid[position[0]+hmove][position[1]+vmove].warp!=pointer_invalid && !warped){
+				// is target a warp tile
+				position[0]+=hmove;
+				position[1]+=vmove;
+				moved=true;
+			
+				// warp only if other warp spot doesnt have a box on it
+				if(!obj_grid_manager.grid[obj_grid_manager.grid[position[0]][position[1]].warp[0]][obj_grid_manager.grid[position[0]][position[1]].warp[1]].box){
+					move_prev=[variable_clone(hmove),variable_clone(vmove)]
+					actionable=false;
+					warped=true;
+					alarm[0]=60;
+				}
+			
+			}else if(!obj_grid_manager.grid[position[0]+hmove][position[1]+vmove].wall && !obj_grid_manager.grid[position[0]+hmove][position[1]+vmove].hole && obj_grid_manager.grid[position[0]+hmove][position[1]+vmove].door_open){
+				// target is not a hole or wall
+				position[0]+=hmove;
+				position[1]+=vmove;
+				moved=true;
 			}
-			
-		}else if(!obj_grid_manager.grid[position[0]+hmove][position[1]+vmove].wall && !obj_grid_manager.grid[position[0]+hmove][position[1]+vmove].hole && obj_grid_manager.grid[position[0]+hmove][position[1]+vmove].door_open){
-			// target is not a hole or wall
-			position[0]+=hmove;
-			position[1]+=vmove;
-			moved=true;
 		}
 	}
 	if(hmove==0 && vmove==0){

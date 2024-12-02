@@ -9,6 +9,30 @@ moved=false;
 
 stored_movement=[];
 
+arrows=[];
+
+create_arrow = function(_hmove, _vmove){
+	if(array_length(arrows)==0){
+		var _arrow = instance_create_layer(x_draw+obj_grid_manager.tile_size*_hmove,y_draw+obj_grid_manager.tile_size*_hmove,"ui",obj_arrow)
+		_arrow.x_draw=x_draw+obj_grid_manager.tile_size*_hmove;
+		_arrow.y_draw=y_draw+obj_grid_manager.tile_size*_vmove;
+
+		_arrow.image_angle=point_direction(0,0,_hmove,_vmove);
+
+		array_push(arrows,_arrow)
+	}else{
+		var _arrow_prev=arrows[array_length(arrows)-1]
+		var _arrow = instance_create_layer(_arrow_prev.x_draw+obj_grid_manager.tile_size*_hmove,_arrow_prev.y_draw+obj_grid_manager.tile_size*_vmove,"ui",obj_arrow)
+
+		_arrow.x_draw=_arrow_prev.x_draw+obj_grid_manager.tile_size*_hmove;
+		_arrow.y_draw=_arrow_prev.y_draw+obj_grid_manager.tile_size*_vmove;
+		_arrow.image_angle=point_direction(0,0,_hmove,_vmove);
+
+		array_push(arrows,_arrow)
+		
+	}
+}
+
 push = function(_hmove, _vmove){
 	moved=false;
 	if(position[0]+_hmove>=0&&position[0]+_hmove<obj_grid_manager.grid_size[0] && position[1]+_vmove>=0&&position[1]+_vmove<obj_grid_manager.grid_size[1]){
@@ -67,6 +91,10 @@ final_resume = function(){
 	}else if(draw_color!=c_gray){
 		obj_grid_manager.grid[position[0]][position[1]].box=true;
 		obj_grid_manager.grid[position[0]][position[1]].box_obj=self;
+	}
+	
+	while(array_length(arrows)>0){
+		instance_destroy(array_pop(arrows))	
 	}
 }
 
